@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salle 3 - IA Lab Escape</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Salle 3 : Réflexion éthique</h1>
+    <div id="timer">15:00</div>
+    <p>Quelle est une limite éthique de l’IA générative ?</p>
+    <button onclick="checkAnswer('a')" class="button">a) Biais</button>
+    <button onclick="checkAnswer('b')" class="button">b) Coût</button>
+    <button onclick="checkAnswer('c')" class="button">c) Complexité</button>
+    <button onclick="checkAnswer('d')" class="button">d) Toutes</button>
+    <div id="feedback"></div>
+    <div class="hints">
+      <p>Indices : Un biais peut fausser les réponses de l’IA.</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function checkAnswer(answer) {
+      const feedback = document.getElementById('feedback');
+      if (answer === 'a') {
+        feedback.innerHTML = '<p style="color: green;">Bravo, les biais sont une limite éthique !</p>';
+        setTimeout(() => { window.location.href = 'fin.html'; }, 2000);
+      } else {
+        feedback.innerHTML = '<p style="color: red;">Incorrect, les biais sont une limite clé.</p>';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salle 2 - IA Lab Escape</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/interactjs"></script>
+  <style>
+    .draggable { width: 100px; padding: 10px; background: #1e3a8a; color: white; margin: 10px; cursor: move; }
+    .dropzone { width: 200px; height: 50px; border: 2px dashed #f97316; margin: 10px; }
+    .dropzone.active { background: #f97316; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Salle 2 : Applications pédagogiques</h1>
+    <div id="timer">15:00</div>
+    <p>Associez chaque outil d’IA à son cas d’usage.</p>
+    <div style="display: flex; justify-content: center;">
+      <div>
+        <div class="draggable" data-tool="chatgpt">ChatGPT</div>
+        <div class="draggable" data-tool="dalle">DALL-E</div>
+      </div>
+      <div>
+        <div class="dropzone" data-target="texte">Générer un texte</div>
+        <div class="dropzone" data-target="image">Créer une image</div>
+      </div>
+    </div>
+    <button onclick="validateDragDrop()" class="button">Valider</button>
+    <div id="feedback"></div>
+    <div class="hints">
+      <p>Indices : ChatGPT pour les textes, DALL-E pour les images.</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    interact('.draggable').draggable({
+      onmove: event => {
+        const target = event.target;
+        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        target.style.transform = `translate(${x}px, ${y}px)`;
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+      }
+    });
+
+    interact('.dropzone').dropzone({
+      accept: '.draggable',
+      ondrop: event => {
+        event.relatedTarget.setAttribute('data-dropped', event.target.getAttribute('data-target'));
+      }
+    });
+
+    function validateDragDrop() {
+      const feedback = document.getElementById('feedback');
+      const chatgpt = document.querySelector('[data-tool="chatgpt"]').getAttribute('data-dropped');
+      const dalle = document.querySelector('[data-tool="dalle"]').getAttribute('data-dropped');
+      if (chatgpt === 'texte' && dalle === 'image') {
+        feedback.innerHTML = '<p style="color: green;">Bravo, associations correctes !</p>';
+        setTimeout(() => { window.location.href = 'salle3.html'; }, 2000);
+      } else {
+        feedback.innerHTML = '<p style="color: red;">Incorrect, vérifiez les indices.</p>';
+      }
+    }
+  </script>
+</body>
+</html>

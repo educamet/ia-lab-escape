@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salle 1 - IA Lab Escape</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Salle 1 : Fondamentaux</h1>
+    <div id="timer">15:00</div>
+    <p>Rédigez un prompt pour générer un résumé de 100 mots sur la photosynthèse pour des collégiens.</p>
+    <textarea id="prompt" rows="4" cols="50" placeholder="Entrez votre prompt..."></textarea>
+    <button onclick="validatePrompt()" class="button">Valider</button>
+    <div id="feedback"></div>
+    <div class="hints">
+      <p>Indices : Soyez clair et précisez le public cible (ex. : collégiens).</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function validatePrompt() {
+      const prompt = document.getElementById('prompt').value.toLowerCase();
+      const feedback = document.getElementById('feedback');
+      if (prompt.includes('photosynthèse') && prompt.includes('collégiens') && prompt.length > 20) {
+        feedback.innerHTML = '<p style="color: green;">Bravo, votre prompt est clair !</p>';
+        setTimeout(() => { window.location.href = 'salle2.html'; }, 2000);
+      } else {
+        feedback.innerHTML = '<p style="color: red;">Trop vague, précisez le public cible ou le sujet. Réessayez.</p>';
+      }
+    }
+  </script>
+</body>
+</html>
