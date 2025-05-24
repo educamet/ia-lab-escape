@@ -1,6 +1,6 @@
 /* Styles généraux pour toutes les pages */
 body {
-  background: url('assets/background-lab.jpg') no-repeat center/cover;
+  background: url('background-lab.jpg') no-repeat center/cover;
   font-family: 'Roboto', sans-serif;
   color: white;
   text-align: center;
